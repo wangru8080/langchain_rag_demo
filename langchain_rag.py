@@ -131,7 +131,7 @@ async def bing_search(query):
 
 if __name__ == '__main__':
     PROMPT_TEMPLATE = '参考信息：\n{reference}\n\n请从参考信息中筛选关联内容回答：{query}'
-    query = '开屏广告是否违法？'
+    query = '北京买房什么时候开始限购的？'
 
     text_list = asyncio.run(bing_search(query))['texts']
     reference = text_retriever(text_list, query, k=4)
@@ -144,4 +144,15 @@ if __name__ == '__main__':
     print('origin response:\n\n{}\n\n'.format(ori_response))
     rag_response = generate(model, tokenizer, text)
     print('rag response:\n\n{}\n\n'.format(rag_response))
+
+    “”“
+    origin response:
+
+    北京市于2013年9月30日开始实施购房限购政策，主要针对非北京户籍居民家庭购房，即“认房又认贷”的政策。该政策要求在本市无住房的非本市户籍家庭，需要提供五年内连续在北京缴纳社会保险或者个人所得税的记录，且家庭名下在京无住房才能购买一套住房。此后，北京市政府根据房地产市场情况，适时调整了限购政策。如果您需要最新的购房政策信息，建议您咨询当地的房地产管理部门或关注官方发布的最新通知。
+
+
+    rag response:
+    
+    北京限购房子是从2011年开始的。具体来说，只要是2011年2月17日0：00之后进行网签的住房，都执行了新的限购政策。
+    ”“”
 
